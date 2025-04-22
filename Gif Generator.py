@@ -1,23 +1,45 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox
 from tkinter import ttk
-from PIL import Image
-import os
+from PIL import Image, ImageTk
 
-# Select multiple images
+# Store image references
+preview_thumbnails = []
+image_files = []
+
+# Function to select and preview images
 def select_images():
+    global preview_thumbnails, image_files
+
     file_paths = filedialog.askopenfilenames(
-        title="Select Images", 
+        title="Select Images",
         filetypes=(("Image files", "*.png;*.jpg;*.jpeg;*.gif"), ("All files", "*.*"))
     )
-    if file_paths:
-        image_paths.set("\n".join(file_paths))
 
-# Create the GIF
+    if file_paths:
+        image_files = list(file_paths)
+        # Clear previous previews
+        for widget in preview_frame.winfo_children():
+            widget.destroy()
+        preview_thumbnails.clear()
+
+        # Load and display thumbnails
+        for idx, path in enumerate(image_files):
+            try:
+                img = Image.open(path)
+                img.thumbnail((100, 100))
+                thumb = ImageTk.PhotoImage(img)
+                preview_thumbnails.append(thumb)
+
+                label = ttk.Label(preview_frame, image=thumb)
+                label.grid(row=idx // 5, column=idx % 5, padx=5, pady=5)
+            except Exception as e:
+                messagebox.showerror("Error", f"Could not load image:\n{e}")
+
+# Function to create the GIF
 def create_gif():
     try:
-        paths = image_paths.get().split("\n")
-        if not paths or len(paths) < 2:
+        if len(image_files) < 2:
             messagebox.showerror("Error", "Please select at least two images.")
             return
 
@@ -42,7 +64,7 @@ def create_gif():
             return
 
         images = []
-        for path in paths:
+        for path in image_files:
             img = Image.open(path).convert("RGBA")
             img = img.resize(target_size, Image.Resampling.LANCZOS)
             images.append(img)
@@ -63,25 +85,20 @@ def create_gif():
     except Exception as e:
         messagebox.showerror("Error", f"An error occurred:\n{e}")
 
-# Main window
+# ---------------------- GUI SETUP ----------------------
+
 root = tk.Tk()
 root.title("GIF Creator")
-root.geometry("500x620")
+root.geometry("550x700")
 root.configure(bg="#1d1f27")
 
-frame = ttk.Frame(root, padding="30")
-frame.pack(fill="both", expand=True)
+frame = ttk.Frame(root, padding="20")
+frame.pack(fill="both", expand=False)
 
-# Title
 label = ttk.Label(frame, text="GIF Creator", font=("Arial", 24, "bold"), foreground="#FFD700")
 label.pack(pady=10)
 
-# Entry for image paths
-image_paths = tk.StringVar()
-entry = ttk.Entry(frame, textvariable=image_paths, width=50, font=("Arial", 12), justify="center", style="TEntry")
-entry.pack(pady=10)
-
-# --- Frame Duration ---
+# Duration input
 duration_label = ttk.Label(frame, text="Frame Duration (ms):", font=("Arial", 12, "bold"), foreground="#FFD700")
 duration_label.pack(pady=(20, 5))
 
@@ -89,7 +106,7 @@ duration_var = tk.StringVar(value="3000")
 duration_entry = ttk.Entry(frame, textvariable=duration_var, width=15, font=("Arial", 12), justify="center", style="TEntry")
 duration_entry.pack(pady=5)
 
-# --- Resolution ---
+# Resolution input
 res_label = ttk.Label(frame, text="Resolution (width x height):", font=("Arial", 12, "bold"), foreground="#FFD700")
 res_label.pack(pady=(20, 5))
 
@@ -113,13 +130,31 @@ select_button = ttk.Button(frame, text="Select Images", command=select_images, w
 select_button.pack(pady=10)
 
 create_button = ttk.Button(frame, text="Create GIF", command=create_gif, width=20, style="TButton")
-create_button.pack(pady=20)
+create_button.pack(pady=15)
+
+# Thumbnail preview frame (scrollable)
+preview_container = ttk.LabelFrame(root, text="Selected Image Previews", padding="10")
+preview_container.pack(fill="both", expand=True, padx=20, pady=10)
+
+canvas = tk.Canvas(preview_container, bg="#1d1f27", highlightthickness=0)
+canvas.pack(side="left", fill="both", expand=True)
+
+scrollbar = ttk.Scrollbar(preview_container, orient="vertical", command=canvas.yview)
+scrollbar.pack(side="right", fill="y")
+
+canvas.configure(yscrollcommand=scrollbar.set)
+canvas.bind('<Configure>', lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
+
+preview_frame = ttk.Frame(canvas)
+canvas.create_window((0, 0), window=preview_frame, anchor="nw")
 
 # Styles
 style = ttk.Style()
 style.configure("TButton", font=("Arial", 14), padding=12, background="#ff7f50", foreground="#000000", borderwidth=0)
 style.map("TButton", background=[("active", "#e6713a")])
 style.configure("TEntry", fieldbackground="#2b2f3a", foreground="#FFD700", font=("Arial", 12))
+style.configure("TLabelframe", background="#1d1f27", foreground="#FFD700")
+style.configure("TLabelframe.Label", background="#1d1f27", foreground="#FFD700")
 
-# Run it
+# Run the GUI
 root.mainloop()
