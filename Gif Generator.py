@@ -3,40 +3,66 @@ from tkinter import filedialog, messagebox
 from tkinter import ttk
 from PIL import Image, ImageTk
 
-# Store image references
-preview_thumbnails = []
-image_files = []
+# Global image storage
+image_files = []      # List of selected file paths
+preview_widgets = []  # List of preview widget frames
 
-# Function to select and preview images
+# Select images and show previews
 def select_images():
-    global preview_thumbnails, image_files
+    global image_files, preview_widgets
 
     file_paths = filedialog.askopenfilenames(
         title="Select Images",
         filetypes=(("Image files", "*.png;*.jpg;*.jpeg;*.gif"), ("All files", "*.*"))
     )
-
+    
     if file_paths:
-        image_files = list(file_paths)
-        # Clear previous previews
-        for widget in preview_frame.winfo_children():
-            widget.destroy()
-        preview_thumbnails.clear()
+        image_files.extend(file_paths)
+        show_image_previews()
 
-        # Load and display thumbnails
-        for idx, path in enumerate(image_files):
-            try:
-                img = Image.open(path)
-                img.thumbnail((100, 100))
-                thumb = ImageTk.PhotoImage(img)
-                preview_thumbnails.append(thumb)
+# Show image previews with remove buttons
+def show_image_previews():
+    # Clear current widgets
+    for widget in preview_frame.winfo_children():
+        widget.destroy()
+    preview_widgets.clear()
 
-                label = ttk.Label(preview_frame, image=thumb)
-                label.grid(row=idx // 5, column=idx % 5, padx=5, pady=5)
-            except Exception as e:
-                messagebox.showerror("Error", f"Could not load image:\n{e}")
+    for idx, path in enumerate(image_files):
+        try:
+            # Create preview container
+            container = tk.Frame(preview_frame, width=100, height=100, bg="#1d1f27")
+            container.grid(row=idx // 5, column=idx % 5, padx=5, pady=5)
+            container.pack_propagate(0)
 
-# Function to create the GIF
+            # Load and resize thumbnail
+            img = Image.open(path)
+            img.thumbnail((90, 90))
+            thumb = ImageTk.PhotoImage(img)
+
+            # Store to prevent garbage collection
+            container.image = thumb
+
+            # Image label
+            img_label = tk.Label(container, image=thumb, bg="#1d1f27")
+            img_label.pack(expand=True)
+
+            # Remove button (top right)
+            remove_btn = tk.Button(container, text="❌", command=lambda p=path: remove_image(p),
+                                   font=("Arial", 8), bg="#ff4d4d", fg="white", relief="flat")
+            remove_btn.place(x=75, y=0, width=20, height=20)
+
+            preview_widgets.append(container)
+        except Exception as e:
+            messagebox.showerror("Error", f"Could not preview image:\n{e}")
+
+# Remove selected image
+def remove_image(path_to_remove):
+    global image_files
+    if path_to_remove in image_files:
+        image_files.remove(path_to_remove)
+        show_image_previews()
+
+# Create the GIF
 def create_gif():
     try:
         if len(image_files) < 2:
@@ -89,7 +115,7 @@ def create_gif():
 
 root = tk.Tk()
 root.title("GIF Creator")
-root.geometry("550x700")
+root.geometry("550x720")
 root.configure(bg="#1d1f27")
 
 frame = ttk.Frame(root, padding="20")
@@ -132,7 +158,7 @@ select_button.pack(pady=10)
 create_button = ttk.Button(frame, text="Create GIF", command=create_gif, width=20, style="TButton")
 create_button.pack(pady=15)
 
-# Thumbnail preview frame (scrollable)
+# Thumbnail preview area
 preview_container = ttk.LabelFrame(root, text="Selected Image Previews", padding="10")
 preview_container.pack(fill="both", expand=True, padx=20, pady=10)
 
@@ -156,5 +182,5 @@ style.configure("TEntry", fieldbackground="#2b2f3a", foreground="#FFD700", font=
 style.configure("TLabelframe", background="#1d1f27", foreground="#FFD700")
 style.configure("TLabelframe.Label", background="#1d1f27", foreground="#FFD700")
 
-# Run the GUI
+# Run the app
 root.mainloop()
