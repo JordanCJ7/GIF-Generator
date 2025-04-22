@@ -1,20 +1,23 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox
+from tkinter import ttk
 from PIL import Image
-import requests
-from io import BytesIO
+import os
 
 # Function to select images and store them
 def select_images():
-    file_paths = filedialog.askopenfilenames(title="Select Images", filetypes=(("Image files", "*.png;*.jpg;*.jpeg;*.gif"), ("All files", "*.*")))
+    file_paths = filedialog.askopenfilenames(
+        title="Select Images", 
+        filetypes=(("Image files", "*.png;*.jpg;*.jpeg;*.gif"), ("All files", "*.*"))
+    )
     if file_paths:
-        image_paths.set(", ".join(file_paths))  # Display selected paths in the entry widget
+        image_paths.set("\n".join(file_paths))  # Display selected paths in the entry widget
 
 # Function to create GIF
 def create_gif():
     try:
         # Get the file paths from the entry
-        paths = image_paths.get().split(", ")
+        paths = image_paths.get().split("\n")
         
         if not paths or len(paths) < 2:
             messagebox.showerror("Error", "Please select at least two images.")
@@ -52,22 +55,31 @@ def create_gif():
 # Create the main window
 root = tk.Tk()
 root.title("GIF Creator")
+root.geometry("400x400")  # Set window size
 
-# Create and place the widgets
-tk.Label(root, text="Select images to create GIF:").pack(padx=10, pady=10)
+# Add a background color and a nice padding around elements
+root.configure(bg="#f0f0f0")
 
-# Entry widget to show selected file paths
+# Create a Frame to hold the widgets
+frame = ttk.Frame(root, padding="20")
+frame.pack(fill="both", expand=True)
+
+# Add a heading label
+label = ttk.Label(frame, text="GIF Creator", font=("Helvetica", 18, "bold"), foreground="#333")
+label.pack(pady=10)
+
+# Create and place the widget for file paths (a text widget for longer paths)
 image_paths = tk.StringVar()
-entry = tk.Entry(root, textvariable=image_paths, width=50)
-entry.pack(padx=10, pady=5)
+entry = ttk.Entry(frame, textvariable=image_paths, width=50)
+entry.pack(pady=10)
 
 # Button to open file dialog and select images
-select_button = tk.Button(root, text="Select Images", command=select_images)
-select_button.pack(padx=10, pady=5)
+select_button = ttk.Button(frame, text="Select Images", command=select_images)
+select_button.pack(pady=5)
 
 # Button to create GIF
-create_button = tk.Button(root, text="Create GIF", command=create_gif)
-create_button.pack(padx=10, pady=10)
+create_button = ttk.Button(frame, text="Create GIF", command=create_gif)
+create_button.pack(pady=20)
 
 # Start the GUI event loop
 root.mainloop()
