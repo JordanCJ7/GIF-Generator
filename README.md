@@ -56,16 +56,17 @@ The application utilizes the **Pillow** library to handle image processing and *
 - Refined image preview display with consistent styling in the scrollable frame.
 - Optimized user experience by improving the image file handling logic.
 
-### 🧼 Version 1.4 - Smarter Image Management & UX Tweaks
+### 🧼 Version 1.4 - Smarter Image Management & UX Tweaks  
 **Release Date**: April 2025
 
 **Features:**
-- Added **❌ remove buttons** to each image thumbnail, allowing users to remove individual images without restarting the selection.
-- Wrapped each preview in its own **Frame container** to support overlay controls and maintain a consistent layout.
-- Enabled **incremental image selection** so that newly chosen files are added to the existing list rather than replacing it.
-- Improved the **thumbnail refresh logic** to cleanly remove old previews and regenerate the layout without overlap or artifacts.
-- Maintained the solid **GIF creation logic**, as well as existing **input validation** for duration and resolution.
-- Preserved the **stylish and intuitive UI structure**, keeping the experience seamless.
+- Added **❌ remove buttons** to image thumbnails for easier image removal.
+- Wrapped each thumbnail in its own **Frame container** for a cleaner, more structured layout.
+- Enabled **incremental image selection**, so new images are added to the list without replacing previous selections.
+- Improved **thumbnail refresh** logic for smoother layout updates.
+- Kept **GIF creation logic** and **input validation** consistent with previous versions.
+- Maintained the **stylish and intuitive UI** throughout.
+
 
 ---
 
