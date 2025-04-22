@@ -81,7 +81,7 @@ create_button.pack(pady=30)
 
 # Style the buttons to have custom background, padding, and fonts
 style = ttk.Style()
-style.configure("TButton", font=("Arial", 14), padding=12, background="#ff7f50", foreground="#ffffff", borderwidth=0)
+style.configure("TButton", font=("Arial", 14), padding=12, background="#ff7f50", foreground="#000000", borderwidth=0)  # Black text
 style.map("TButton", background=[("active", "#e6713a")])  # Button color when hovered
 
 # Set the style for entry widgets (a soft light color for text and background)
