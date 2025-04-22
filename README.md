@@ -69,12 +69,12 @@ The application utilizes the **Pillow** library to handle image processing and *
 
 1. Clone or download the repository:
     ```bash
-    git clone https://github.com/yourusername/gif-generator.git
+    git clone https://github.com/yourusername/GIF-Generator.git
     ```
 
 2. Navigate to the project folder:
     ```bash
-    cd gif-generator
+    cd GIF-Generator
     ```
 
 3. Install the necessary dependencies:
@@ -84,7 +84,7 @@ The application utilizes the **Pillow** library to handle image processing and *
 
 4. Run the application:
     ```bash
-    python gif_generator.py
+    python "GIF Generator.py"
     ```
 
 ---
