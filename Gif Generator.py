@@ -4,7 +4,7 @@ from tkinter import ttk
 from PIL import Image
 import os
 
-# Function to select images and store them
+# Select multiple images
 def select_images():
     file_paths = filedialog.askopenfilenames(
         title="Select Images", 
@@ -13,16 +13,15 @@ def select_images():
     if file_paths:
         image_paths.set("\n".join(file_paths))
 
-# Function to create GIF
+# Create the GIF
 def create_gif():
     try:
-        # Get selected paths
         paths = image_paths.get().split("\n")
         if not paths or len(paths) < 2:
             messagebox.showerror("Error", "Please select at least two images.")
             return
 
-        # Get duration input
+        # Validate duration
         try:
             duration = int(duration_var.get())
             if duration <= 0:
@@ -31,9 +30,18 @@ def create_gif():
             messagebox.showerror("Error", "Frame duration must be a positive number.")
             return
 
-        images = []
-        target_size = (300, 300)
+        # Validate resolution
+        try:
+            width = int(width_var.get())
+            height = int(height_var.get())
+            if width <= 0 or height <= 0:
+                raise ValueError
+            target_size = (width, height)
+        except ValueError:
+            messagebox.showerror("Error", "Width and Height must be positive integers.")
+            return
 
+        images = []
         for path in paths:
             img = Image.open(path).convert("RGBA")
             img = img.resize(target_size, Image.Resampling.LANCZOS)
@@ -46,22 +54,21 @@ def create_gif():
                 format="GIF",
                 save_all=True,
                 append_images=images[1:],
-                duration=duration,  # Use custom duration here
+                duration=duration,
                 loop=0
             )
             messagebox.showinfo("Success", f"GIF saved as {save_path}")
         else:
             messagebox.showwarning("Canceled", "GIF creation canceled.")
     except Exception as e:
-        messagebox.showerror("Error", f"An error occurred: {e}")
+        messagebox.showerror("Error", f"An error occurred:\n{e}")
 
-# Main window setup
+# Main window
 root = tk.Tk()
 root.title("GIF Creator")
-root.geometry("500x550")
+root.geometry("500x620")
 root.configure(bg="#1d1f27")
 
-# Frame setup
 frame = ttk.Frame(root, padding="30")
 frame.pack(fill="both", expand=True)
 
@@ -74,13 +81,32 @@ image_paths = tk.StringVar()
 entry = ttk.Entry(frame, textvariable=image_paths, width=50, font=("Arial", 12), justify="center", style="TEntry")
 entry.pack(pady=10)
 
-# Frame duration input
+# --- Frame Duration ---
 duration_label = ttk.Label(frame, text="Frame Duration (ms):", font=("Arial", 12, "bold"), foreground="#FFD700")
 duration_label.pack(pady=(20, 5))
 
-duration_var = tk.StringVar(value="3000")  # Default to 3000ms (3 seconds)
+duration_var = tk.StringVar(value="3000")
 duration_entry = ttk.Entry(frame, textvariable=duration_var, width=15, font=("Arial", 12), justify="center", style="TEntry")
 duration_entry.pack(pady=5)
+
+# --- Resolution ---
+res_label = ttk.Label(frame, text="Resolution (width x height):", font=("Arial", 12, "bold"), foreground="#FFD700")
+res_label.pack(pady=(20, 5))
+
+res_frame = ttk.Frame(frame)
+res_frame.pack(pady=5)
+
+width_var = tk.StringVar(value="300")
+height_var = tk.StringVar(value="300")
+
+width_entry = ttk.Entry(res_frame, textvariable=width_var, width=10, font=("Arial", 12), justify="center", style="TEntry")
+width_entry.grid(row=0, column=0, padx=5)
+
+x_label = ttk.Label(res_frame, text="x", font=("Arial", 12, "bold"), foreground="#FFD700")
+x_label.grid(row=0, column=1, padx=5)
+
+height_entry = ttk.Entry(res_frame, textvariable=height_var, width=10, font=("Arial", 12), justify="center", style="TEntry")
+height_entry.grid(row=0, column=2, padx=5)
 
 # Buttons
 select_button = ttk.Button(frame, text="Select Images", command=select_images, width=20, style="TButton")
@@ -89,11 +115,11 @@ select_button.pack(pady=10)
 create_button = ttk.Button(frame, text="Create GIF", command=create_gif, width=20, style="TButton")
 create_button.pack(pady=20)
 
-# Style configuration
+# Styles
 style = ttk.Style()
 style.configure("TButton", font=("Arial", 14), padding=12, background="#ff7f50", foreground="#000000", borderwidth=0)
 style.map("TButton", background=[("active", "#e6713a")])
 style.configure("TEntry", fieldbackground="#2b2f3a", foreground="#FFD700", font=("Arial", 12))
 
-# Run the app
+# Run it
 root.mainloop()
