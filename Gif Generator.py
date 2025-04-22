@@ -55,34 +55,37 @@ def create_gif():
 # Create the main window
 root = tk.Tk()
 root.title("GIF Creator")
-root.geometry("450x450")  # Set window size
-root.configure(bg="#f0f0f0")  # Set background color for the window
+root.geometry("500x500")  # Adjust the window size for a more spacious layout
+root.configure(bg="#1d1f27")  # Set a dark background color for the window
 
 # Create a Frame to hold the widgets with some padding
-frame = ttk.Frame(root, padding="20")
+frame = ttk.Frame(root, padding="30")
 frame.pack(fill="both", expand=True)
 
-# Add a heading label with custom font
-label = ttk.Label(frame, text="GIF Creator", font=("Helvetica", 18, "bold"), foreground="#333")
-label.pack(pady=10)
+# Add a heading label with modern font and color
+label = ttk.Label(frame, text="GIF Creator", font=("Arial", 24, "bold"), foreground="#ffffff")
+label.pack(pady=20)
 
-# Create and place the widget for file paths (a text widget for longer paths)
+# Create and place the widget for file paths (entry widget for longer paths)
 image_paths = tk.StringVar()
-entry = ttk.Entry(frame, textvariable=image_paths, width=50, font=("Helvetica", 12))
-entry.pack(pady=10)
+entry = ttk.Entry(frame, textvariable=image_paths, width=50, font=("Arial", 12), justify="center")
+entry.pack(pady=15)
 
 # Button to open file dialog and select images
 select_button = ttk.Button(frame, text="Select Images", command=select_images, width=20, style="TButton")
-select_button.pack(pady=5)
+select_button.pack(pady=10)
 
 # Button to create GIF
 create_button = ttk.Button(frame, text="Create GIF", command=create_gif, width=20, style="TButton")
-create_button.pack(pady=20)
+create_button.pack(pady=30)
 
 # Style the buttons to have custom background, padding, and fonts
 style = ttk.Style()
-style.configure("TButton", font=("Helvetica", 12), padding=10, background="#4CAF50", foreground="white")
-style.map("TButton", background=[("active", "#45a049")])  # Change color on hover
+style.configure("TButton", font=("Arial", 14), padding=12, background="#ff7f50", foreground="#ffffff", borderwidth=0)
+style.map("TButton", background=[("active", "#e6713a")])  # Button color when hovered
+
+# Set the style for entry widgets (a soft light color)
+style.configure("TEntry", fieldbackground="#2b2f3a", foreground="#ffffff", font=("Arial", 12))
 
 # Start the GUI event loop
 root.mainloop()
