@@ -22,6 +22,8 @@ def select_images():
 
 # Show image previews with remove buttons
 def show_image_previews():
+    global preview_widgets
+
     # Clear current widgets
     for widget in preview_frame.winfo_children():
         widget.destroy()
