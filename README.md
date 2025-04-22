@@ -1,23 +1,23 @@
-# GIF Generator
+# 🎥 GIF Generator
 
-GIF Generator is a user-friendly Python application built with **Tkinter** that allows users to create animated GIFs by selecting images, adjusting the frame duration, and setting a custom resolution for each frame. This tool also features a live preview of selected images, offering a seamless user experience.
+GIF Generator is a user-friendly Python application built with **Tkinter** that allows users to create animated GIFs by selecting images, adjusting the frame duration, and setting a custom resolution for each frame. This tool also features a live preview of selected images, offering a seamless user experience. 🌟
 
-The application utilizes the **Pillow** library to handle image processing and **Tkinter** for creating the graphical user interface (GUI). Whether you are a beginner looking to create fun animated GIFs or a professional in need of quick GIF creation, this tool will help you easily create GIFs for any purpose.
+The application utilizes the **Pillow** library to handle image processing and **Tkinter** for creating the graphical user interface (GUI). Whether you are a beginner looking to create fun animated GIFs or a professional in need of quick GIF creation, this tool will help you easily create GIFs for any purpose. 🎨
 
-## Features
+## ✨ Features
 
-- **Select multiple images** from your device.
-- **Preview the selected images** as thumbnails before creating the GIF.
-- **Customizable frame duration** (in milliseconds) for the GIF.
-- **Customizable resolution** for the GIF frames (width x height).
-- **Scroll through selected image previews** if more than five images are selected.
-- **Easy GIF creation** by specifying output file location and settings.
+- 📂 **Select multiple images** from your device.
+- 🖼️ **Preview the selected images** as thumbnails before creating the GIF.
+- ⏱️ **Customizable frame duration** (in milliseconds) for the GIF.
+- 📏 **Customizable resolution** for the GIF frames (width x height).
+- 🔄 **Scroll through selected image previews** if more than five images are selected.
+- 🎬 **Easy GIF creation** by specifying output file location and settings.
 
 ---
 
-## Project Version History
+## 🕒 Project Version History
 
-### Version 1.0 - Initial Release
+### 🚀 Version 1.0 - Initial Release
 **Release Date**: April 2025
 
 **Features:**
@@ -27,7 +27,7 @@ The application utilizes the **Pillow** library to handle image processing and *
 - Fixed frame duration of 3 seconds.
 - Set default resolution for GIF frames to 300x300 pixels.
 
-### Version 1.1 - Frame Duration and Resolution Customization
+### 🛠️ Version 1.1 - Frame Duration and Resolution Customization
 **Release Date**: April 2025
 
 **Features:**
@@ -36,7 +36,7 @@ The application utilizes the **Pillow** library to handle image processing and *
 - Improved error handling for **invalid input** (non-positive values).
 - Basic layout and button styling enhancements.
 
-### Version 1.2 - Image Preview Feature
+### 🖼️ Version 1.2 - Image Preview Feature
 **Release Date**: April 2025
 
 **Features:**
@@ -47,7 +47,7 @@ The application utilizes the **Pillow** library to handle image processing and *
 - Enhanced error handling when loading or displaying images.
 - Adjusted window size for accommodating the image preview section.
 
-### Version 1.3 - Final Refinements & GUI Styling
+### 🎨 Version 1.3 - Final Refinements & GUI Styling
 **Release Date**: April 2025
 
 **Features:**
@@ -58,12 +58,12 @@ The application utilizes the **Pillow** library to handle image processing and *
 
 ---
 
-## How to Run the Project
+## 🛠️ How to Run the Project
 
 ### Requirements:
-- Python 3.x
-- Pillow library (`pip install Pillow`)
-- Tkinter (typically included with Python)
+- 🐍 Python 3.x
+- 🖼️ Pillow library (`pip install Pillow`)
+- 🖥️ Tkinter (typically included with Python)
 
 ### Running the GIF Generator:
 
@@ -89,24 +89,24 @@ The application utilizes the **Pillow** library to handle image processing and *
 
 ---
 
-## Usage Instructions
+## 📖 Usage Instructions
 
-1. **Select Images**: Click the "Select Images" button to choose multiple images from your file explorer.
-2. **Preview Images**: The selected images will appear as thumbnails below the main interface. If you select more than five images, a scrollable view will be available to browse through the thumbnails.
-3. **Set Frame Duration**: Enter the desired frame duration in milliseconds. The default value is 3000ms (3 seconds).
-4. **Set Resolution**: Enter the width and height for the GIF resolution. The default resolution is 300x300 pixels.
-5. **Create GIF**: Click the "Create GIF" button to generate the GIF. The program will prompt you to choose a location and filename to save the resulting GIF.
+1. **📂 Select Images**: Click the "Select Images" button to choose multiple images from your file explorer.
+2. **🖼️ Preview Images**: The selected images will appear as thumbnails below the main interface. If you select more than five images, a scrollable view will be available to browse through the thumbnails.
+3. **⏱️ Set Frame Duration**: Enter the desired frame duration in milliseconds. The default value is 3000ms (3 seconds).
+4. **📏 Set Resolution**: Enter the width and height for the GIF resolution. The default resolution is 300x300 pixels.
+5. **🎬 Create GIF**: Click the "Create GIF" button to generate the GIF. The program will prompt you to choose a location and filename to save the resulting GIF.
 
 ---
 
-## Contributing
+## 🤝 Contributing
 
-Feel free to fork this repository and submit pull requests for new features, bug fixes, or improvements. Contributions are welcome!
+Feel free to fork this repository and submit pull requests for new features, bug fixes, or improvements. Contributions are welcome! 🌟
 
 ### How to Contribute:
 
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to your forked repository
-5. Create a pull request
+1. 🍴 Fork the repository
+2. 🌿 Create a feature branch
+3. 💾 Commit your changes
+4. 🚀 Push to your forked repository
+5. 🔄 Create a pull request
