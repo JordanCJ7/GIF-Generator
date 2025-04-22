@@ -55,31 +55,34 @@ def create_gif():
 # Create the main window
 root = tk.Tk()
 root.title("GIF Creator")
-root.geometry("400x400")  # Set window size
+root.geometry("450x450")  # Set window size
+root.configure(bg="#f0f0f0")  # Set background color for the window
 
-# Add a background color and a nice padding around elements
-root.configure(bg="#f0f0f0")
-
-# Create a Frame to hold the widgets
+# Create a Frame to hold the widgets with some padding
 frame = ttk.Frame(root, padding="20")
 frame.pack(fill="both", expand=True)
 
-# Add a heading label
+# Add a heading label with custom font
 label = ttk.Label(frame, text="GIF Creator", font=("Helvetica", 18, "bold"), foreground="#333")
 label.pack(pady=10)
 
 # Create and place the widget for file paths (a text widget for longer paths)
 image_paths = tk.StringVar()
-entry = ttk.Entry(frame, textvariable=image_paths, width=50)
+entry = ttk.Entry(frame, textvariable=image_paths, width=50, font=("Helvetica", 12))
 entry.pack(pady=10)
 
 # Button to open file dialog and select images
-select_button = ttk.Button(frame, text="Select Images", command=select_images)
+select_button = ttk.Button(frame, text="Select Images", command=select_images, width=20, style="TButton")
 select_button.pack(pady=5)
 
 # Button to create GIF
-create_button = ttk.Button(frame, text="Create GIF", command=create_gif)
+create_button = ttk.Button(frame, text="Create GIF", command=create_gif, width=20, style="TButton")
 create_button.pack(pady=20)
+
+# Style the buttons to have custom background, padding, and fonts
+style = ttk.Style()
+style.configure("TButton", font=("Helvetica", 12), padding=10, background="#4CAF50", foreground="white")
+style.map("TButton", background=[("active", "#45a049")])  # Change color on hover
 
 # Start the GUI event loop
 root.mainloop()
