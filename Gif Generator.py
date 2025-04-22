@@ -29,29 +29,37 @@ def show_image_previews():
         widget.destroy()
     preview_widgets.clear()
 
+    columns = 4  # Fixed number of columns per row
     for idx, path in enumerate(image_files):
         try:
-            # Create preview container
-            container = tk.Frame(preview_frame, width=100, height=100, bg="#1d1f27")
-            container.grid(row=idx // 5, column=idx % 5, padx=5, pady=5)
+            # Create a card-style container for each image preview (larger container)
+            container = tk.Frame(preview_frame, width=180, height=230, bg="#2c2f3c", bd=2, relief="solid", padx=5, pady=5)
+            container.grid(row=idx // columns, column=idx % columns, padx=10, pady=10)
             container.pack_propagate(0)
 
-            # Load and resize thumbnail
+            # Load and resize the image (larger thumbnail)
             img = Image.open(path)
-            img.thumbnail((90, 90))
+            img.thumbnail((150, 150))
             thumb = ImageTk.PhotoImage(img)
 
-            # Store to prevent garbage collection
-            container.image = thumb
+            container.image = thumb  # Keep reference
 
             # Image label
-            img_label = tk.Label(container, image=thumb, bg="#1d1f27")
+            img_label = tk.Label(container, image=thumb, bg="#2c2f3c")
             img_label.pack(expand=True)
 
-            # Remove button (top right)
+            # Queue number label
+            queue_number_label = tk.Label(container, text=f"#{idx + 1}", font=("Arial", 12, "bold"), fg="white", bg="#2c2f3c")
+            queue_number_label.place(x=5, y=5)
+
+            # Remove button
             remove_btn = tk.Button(container, text="❌", command=lambda p=path: remove_image(p),
-                                   font=("Arial", 8), bg="#ff4d4d", fg="white", relief="flat")
-            remove_btn.place(x=75, y=0, width=20, height=20)
+                                   font=("Arial", 10), bg="#ff4d4d", fg="white", relief="flat", bd=0)
+            remove_btn.place(x=150, y=5, width=25, height=25)
+
+            # Hover effect
+            container.bind("<Enter>", lambda e, c=container: c.config(bg="#1f2128"))
+            container.bind("<Leave>", lambda e, c=container: c.config(bg="#2c2f3c"))
 
             preview_widgets.append(container)
         except Exception as e:
@@ -117,7 +125,7 @@ def create_gif():
 
 root = tk.Tk()
 root.title("GIF Creator")
-root.geometry("550x720")
+root.geometry("600x800")
 root.configure(bg="#1d1f27")
 
 frame = ttk.Frame(root, padding="20")
@@ -160,7 +168,7 @@ select_button.pack(pady=10)
 create_button = ttk.Button(frame, text="Create GIF", command=create_gif, width=20, style="TButton")
 create_button.pack(pady=15)
 
-# Thumbnail preview area
+# Thumbnail preview area (scrollable canvas inside frame)
 preview_container = ttk.LabelFrame(root, text="Selected Image Previews", padding="10")
 preview_container.pack(fill="both", expand=True, padx=20, pady=10)
 
@@ -173,6 +181,7 @@ scrollbar.pack(side="right", fill="y")
 canvas.configure(yscrollcommand=scrollbar.set)
 canvas.bind('<Configure>', lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
 
+# Embed preview frame inside canvas
 preview_frame = ttk.Frame(canvas)
 canvas.create_window((0, 0), window=preview_frame, anchor="nw")
 
