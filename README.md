@@ -70,37 +70,18 @@ The application utilizes the **Pillow** library to handle image processing and *
 ### 🚀 Version 2.0 - Major Upgrade: Enhanced Image Previews & UI Improvements  
 **Release Date**: April 2025
 
-**✅ Key New Features and Changes**
+**Features:**
+- **🖼️ Larger Image Previews**: The preview containers are now 180x230 with a solid border, and thumbnails are resized to 150x150 for a more prominent display.
+- **🔢 Queue Number Display**: Each image now displays its position in the queue (e.g., #1, #2) to help track the order for GIF creation.
+- **🎨 Hover Effects**: Added hover effects on preview containers, changing the background color for a dynamic user experience.
+- **🛑 Updated Remove Button**: The ❌ button is now placed at the top-right corner of the preview container for easier access.
+- **🖼️ Scrollable Preview Area**: The preview area is now scrollable, ensuring smooth navigation even with many images.
+- **📐 Fixed Preview Columns**: The image previews now display in 4 fixed columns for a consistent and predictable layout.
 
-- **🖼️ Image Previews with Larger Containers**  
-  The image preview containers are now larger (180x230), with a solid border and padding, creating a card-style layout for each image. The thumbnails are resized to a larger size (150x150).  
-  *Impact*: The new card-style layout enhances the visual appearance, making the image previews more prominent and easier to interact with.
-
-- **🔢 Queue Number Display**  
-  A queue number is displayed on each image preview (#1, #2, etc.), indicating the order of images.  
-  *Impact*: Helps users easily track the order of their images in the selection and can be useful if they want to ensure specific order for GIF creation.
-
-- **🎨 Enhanced Styling and Hover Effects**  
-  The preview container now has a hover effect that changes the background color when the mouse enters and leaves the container.  
-  *Impact*: Provides a more dynamic and interactive user experience by giving visual feedback as the user hovers over an image.
-
-- **🛑 Updated Image Remove Button Position**  
-  The remove button (❌) is now positioned at the top-right corner of the preview container, with updated positioning logic.  
-  *Impact*: The button is now more easily accessible and aligns better with the new container design.
-
-- **🖼️ Scrollable Preview Area**  
-  The preview area now utilizes a scrollable canvas to accommodate multiple image previews, especially when there are many images.  
-  *Impact*: Ensures users can scroll through all their selected images even if the number of previews exceeds the screen space.
-
-- **📐 Fixed Columns for Image Previews**  
-  The number of columns for displaying image previews is now fixed at 4 columns per row.  
-  *Impact*: Ensures a more consistent layout and avoids images being arranged unpredictably when many images are selected.
-
-**🔄 Unchanged Features**
-
-- **GIF Creation Logic**: The logic for creating the GIF remains unchanged. It still validates the selected images, frame duration, and resolution before saving the GIF.
-- **Validation**: The validation for frame duration, width, and height input is still present.
-- **GUI Layout**: While the preview area has changed, the rest of the GUI elements (such as input fields and buttons) remain the same as in the previous version.
+**Unchanged Features:**
+- **GIF Creation Logic**: The GIF creation logic remains unchanged, still validating images, frame duration, and resolution before saving.
+- **Input Validation**: Validation for frame duration, width, and height is still in place.
+- **GUI Layout**: The rest of the GUI, such as input fields and buttons, remains the same as in previous versions.
 
 ---
 
