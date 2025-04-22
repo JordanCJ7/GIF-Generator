@@ -71,17 +71,17 @@ The application utilizes the **Pillow** library to handle image processing and *
 **Release Date**: April 2025
 
 **Features:**
-- **🖼️ Larger Image Previews**: The preview containers are now 180x230 with a solid border, and thumbnails are resized to 150x150 for a more prominent display.
-- **🔢 Queue Number Display**: Each image now displays its position in the queue (e.g., #1, #2) to help track the order for GIF creation.
-- **🎨 Hover Effects**: Added hover effects on preview containers, changing the background color for a dynamic user experience.
-- **🛑 Updated Remove Button**: The ❌ button is now placed at the top-right corner of the preview container for easier access.
-- **🖼️ Scrollable Preview Area**: The preview area is now scrollable, ensuring smooth navigation even with many images.
-- **📐 Fixed Preview Columns**: The image previews now display in 4 fixed columns for a consistent and predictable layout.
+- Increased the size of image preview containers to **180x230** with solid borders, and resized thumbnails to **150x150** for improved display.
+- Added **queue number display** on each preview to track the order of images (#1, #2, etc.).
+- Introduced **hover effects** on preview containers, changing the background color on mouse events for better interactivity.
+- Moved the **❌ remove button** to the top-right corner of the preview for easier access.
+- Made the **preview area scrollable** to accommodate more images without layout issues.
+- Set a fixed number of **4 columns** for consistent image preview layout.
 
 **Unchanged Features:**
-- **GIF Creation Logic**: The GIF creation logic remains unchanged, still validating images, frame duration, and resolution before saving.
-- **Input Validation**: Validation for frame duration, width, and height is still in place.
-- **GUI Layout**: The rest of the GUI, such as input fields and buttons, remains the same as in previous versions.
+- **GIF creation logic** remains the same, ensuring images, frame duration, and resolution are validated.
+- **Input validation** for duration, width, and height is still in place.
+- The overall **GUI layout** remains the same with no major changes to input fields or buttons.
 
 ---
 
