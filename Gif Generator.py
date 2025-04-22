@@ -63,12 +63,12 @@ frame = ttk.Frame(root, padding="30")
 frame.pack(fill="both", expand=True)
 
 # Add a heading label with modern font and color
-label = ttk.Label(frame, text="GIF Creator", font=("Arial", 24, "bold"), foreground="#ffffff")
+label = ttk.Label(frame, text="GIF Creator", font=("Arial", 24, "bold"), foreground="#FFD700")  # Gold color
 label.pack(pady=20)
 
 # Create and place the widget for file paths (entry widget for longer paths)
 image_paths = tk.StringVar()
-entry = ttk.Entry(frame, textvariable=image_paths, width=50, font=("Arial", 12), justify="center")
+entry = ttk.Entry(frame, textvariable=image_paths, width=50, font=("Arial", 12), justify="center", style="TEntry")
 entry.pack(pady=15)
 
 # Button to open file dialog and select images
@@ -84,8 +84,8 @@ style = ttk.Style()
 style.configure("TButton", font=("Arial", 14), padding=12, background="#ff7f50", foreground="#ffffff", borderwidth=0)
 style.map("TButton", background=[("active", "#e6713a")])  # Button color when hovered
 
-# Set the style for entry widgets (a soft light color)
-style.configure("TEntry", fieldbackground="#2b2f3a", foreground="#ffffff", font=("Arial", 12))
+# Set the style for entry widgets (a soft light color for text and background)
+style.configure("TEntry", fieldbackground="#2b2f3a", foreground="#FFD700", font=("Arial", 12))  # Gold text for better visibility
 
 # Start the GUI event loop
 root.mainloop()
