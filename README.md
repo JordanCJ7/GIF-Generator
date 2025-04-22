@@ -1,6 +1,6 @@
-# GIF Creator
+# GIF Generator
 
-GIF Creator is a user-friendly Python application built with **Tkinter** that allows users to create animated GIFs by selecting images, adjusting the frame duration, and setting a custom resolution for each frame. This tool also features a live preview of selected images, offering a seamless user experience.
+GIF Generator is a user-friendly Python application built with **Tkinter** that allows users to create animated GIFs by selecting images, adjusting the frame duration, and setting a custom resolution for each frame. This tool also features a live preview of selected images, offering a seamless user experience.
 
 The application utilizes the **Pillow** library to handle image processing and **Tkinter** for creating the graphical user interface (GUI). Whether you are a beginner looking to create fun animated GIFs or a professional in need of quick GIF creation, this tool will help you easily create GIFs for any purpose.
 
@@ -65,16 +65,16 @@ The application utilizes the **Pillow** library to handle image processing and *
 - Pillow library (`pip install Pillow`)
 - Tkinter (typically included with Python)
 
-### Running the GIF Creator:
+### Running the GIF Generator:
 
 1. Clone or download the repository:
     ```bash
-    git clone https://github.com/yourusername/gif-creator.git
+    git clone https://github.com/yourusername/gif-generator.git
     ```
 
 2. Navigate to the project folder:
     ```bash
-    cd gif-creator
+    cd gif-generator
     ```
 
 3. Install the necessary dependencies:
@@ -84,7 +84,7 @@ The application utilizes the **Pillow** library to handle image processing and *
 
 4. Run the application:
     ```bash
-    python gif_creator.py
+    python gif_generator.py
     ```
 
 ---
@@ -110,5 +110,3 @@ Feel free to fork this repository and submit pull requests for new features, bug
 3. Commit your changes
 4. Push to your forked repository
 5. Create a pull request
-
----
