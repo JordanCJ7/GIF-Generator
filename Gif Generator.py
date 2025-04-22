@@ -11,81 +11,89 @@ def select_images():
         filetypes=(("Image files", "*.png;*.jpg;*.jpeg;*.gif"), ("All files", "*.*"))
     )
     if file_paths:
-        image_paths.set("\n".join(file_paths))  # Display selected paths in the entry widget
+        image_paths.set("\n".join(file_paths))
 
 # Function to create GIF
 def create_gif():
     try:
-        # Get the file paths from the entry
+        # Get selected paths
         paths = image_paths.get().split("\n")
-        
         if not paths or len(paths) < 2:
             messagebox.showerror("Error", "Please select at least two images.")
+            return
+
+        # Get duration input
+        try:
+            duration = int(duration_var.get())
+            if duration <= 0:
+                raise ValueError
+        except ValueError:
+            messagebox.showerror("Error", "Frame duration must be a positive number.")
             return
 
         images = []
         target_size = (300, 300)
 
-        # Load and resize all images to the same size
         for path in paths:
             img = Image.open(path).convert("RGBA")
-            img = img.resize(target_size, Image.Resampling.LANCZOS)  # Resize to target size
+            img = img.resize(target_size, Image.Resampling.LANCZOS)
             images.append(img)
 
-        # Ask for a filename to save the GIF
         save_path = filedialog.asksaveasfilename(defaultextension=".gif", filetypes=[("GIF Files", "*.gif")])
         if save_path:
-            # Save as an animated GIF
             images[0].save(
                 save_path,
                 format="GIF",
                 save_all=True,
                 append_images=images[1:],
-                duration=3000,  # 3 seconds per image
+                duration=duration,  # Use custom duration here
                 loop=0
             )
-
             messagebox.showinfo("Success", f"GIF saved as {save_path}")
         else:
-            messagebox.showerror("Error", "No path specified to save the GIF.")
-
+            messagebox.showwarning("Canceled", "GIF creation canceled.")
     except Exception as e:
         messagebox.showerror("Error", f"An error occurred: {e}")
 
-# Create the main window
+# Main window setup
 root = tk.Tk()
 root.title("GIF Creator")
-root.geometry("500x500")  # Adjust the window size for a more spacious layout
-root.configure(bg="#1d1f27")  # Set a dark background color for the window
+root.geometry("500x550")
+root.configure(bg="#1d1f27")
 
-# Create a Frame to hold the widgets with some padding
+# Frame setup
 frame = ttk.Frame(root, padding="30")
 frame.pack(fill="both", expand=True)
 
-# Add a heading label with modern font and color
-label = ttk.Label(frame, text="GIF Creator", font=("Arial", 24, "bold"), foreground="#FFD700")  # Gold color
-label.pack(pady=20)
+# Title
+label = ttk.Label(frame, text="GIF Creator", font=("Arial", 24, "bold"), foreground="#FFD700")
+label.pack(pady=10)
 
-# Create and place the widget for file paths (entry widget for longer paths)
+# Entry for image paths
 image_paths = tk.StringVar()
 entry = ttk.Entry(frame, textvariable=image_paths, width=50, font=("Arial", 12), justify="center", style="TEntry")
-entry.pack(pady=15)
+entry.pack(pady=10)
 
-# Button to open file dialog and select images
+# Frame duration input
+duration_label = ttk.Label(frame, text="Frame Duration (ms):", font=("Arial", 12, "bold"), foreground="#FFD700")
+duration_label.pack(pady=(20, 5))
+
+duration_var = tk.StringVar(value="3000")  # Default to 3000ms (3 seconds)
+duration_entry = ttk.Entry(frame, textvariable=duration_var, width=15, font=("Arial", 12), justify="center", style="TEntry")
+duration_entry.pack(pady=5)
+
+# Buttons
 select_button = ttk.Button(frame, text="Select Images", command=select_images, width=20, style="TButton")
 select_button.pack(pady=10)
 
-# Button to create GIF
 create_button = ttk.Button(frame, text="Create GIF", command=create_gif, width=20, style="TButton")
-create_button.pack(pady=30)
+create_button.pack(pady=20)
 
-# Style the buttons to have custom background, padding, and fonts
+# Style configuration
 style = ttk.Style()
-style.configure("TButton", font=("Arial", 14), padding=12, background="#ff7f50", foreground="#000000", borderwidth=0)  # Black text
-style.map("TButton", background=[("active", "#e6713a")])  # Button color when hovered
+style.configure("TButton", font=("Arial", 14), padding=12, background="#ff7f50", foreground="#000000", borderwidth=0)
+style.map("TButton", background=[("active", "#e6713a")])
+style.configure("TEntry", fieldbackground="#2b2f3a", foreground="#FFD700", font=("Arial", 12))
 
-# Set the style for entry widgets (a soft light color for text and background)
-style.configure("TEntry", fieldbackground="#2b2f3a", foreground="#FFD700", font=("Arial", 12))  # Gold text for better visibility
-
-# Start the GUI event loop
+# Run the app
 root.mainloop()
