@@ -25,7 +25,7 @@ The application utilizes the **Pillow** library to handle image processing and *
 - Select multiple images from file explorer.
 - Convert selected images into an animated GIF.
 - Fixed frame duration of 3 seconds.
-- Set default resolution for GIF frames to 300x300 pixel
+- Set default resolution for GIF frames to 300x300 pixels.
 
 ### 🛠️ Version 1.1 - Frame Duration and Resolution Customization
 **Release Date**: April 2025
