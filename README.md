@@ -56,11 +56,6 @@ The application utilizes the **Pillow** library to handle image processing and *
 - Refined image preview display with consistent styling in the scrollable frame.
 - Optimized user experience by improving the image file handling logic.
 
-### 🧼 Version 1.4 - Smarter Image Management & UX Tweaks  
-**Release Date**: April 2025
-
-**Features:**
-- Added **❌ remove buttons** to image thumbnails for easier image removal.
 - Wrapped each thumbnail in its own **Frame container** for a cleaner, more structured layout.
 - Enabled **incremental image selection**, so new images are added to the list without replacing previous selections.
 - Improved **thumbnail refresh** logic for smoother layout updates.
