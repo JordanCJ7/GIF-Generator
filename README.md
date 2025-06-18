@@ -52,7 +52,8 @@ The application utilizes the **Pillow** library to handle image processing and *
 
 **Features:**
 - Enhanced overall GUI styling with modern fonts, colors, and padding for a professional look.
-- Improved buttoiew display with consistent styling in the scrollable frame.
+- Improved button styles and input field designs to match the visual theme of the app.
+- Refined image preview display with consistent styling in the scrollable frame.
 - Optimized user experience by improving the image file handling logic.
 
 ### 🧼 Version 1.4 - Smarter Image Management & UX Tweaks  
