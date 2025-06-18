@@ -41,7 +41,9 @@ The application utilizes the **Pillow** library to handle image processing and *
 
 **Features:**
 - Introduced a **scrollable thumbnail preview** feature.
-- Users can see **thumbnails o
+- Users can see **thumbnails of selected images** before creating the GIF.
+- Implemented dynamic image loading and grid layout for displaying previews.
+- Added scrolling support to handle multiple images.
 - Enhanced error handling when loading or displaying images.
 - Adjusted window size for accommodating the image preview section.
 
