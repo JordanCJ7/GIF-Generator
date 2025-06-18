@@ -70,7 +70,10 @@ The application utilizes the **Pillow** library to handle image processing and *
 ### 🚀 Version 2.0 - Major Upgrade: Enhanced Image Previews & UI Improvements  
 **Release Date**: April 2025
 
-**Features:** on mouse events for better interactivity.
+**Features:**
+- Increased the size of image preview containers to **180x230** with solid borders, and resized thumbnails to **150x150** for improved display.
+- Added **queue number display** on each preview to track the order of images (#1, #2, etc.).
+- Introduced **hover effects** on preview containers, changing the background color on mouse events for better interactivity.
 - Moved the **❌ remove button** to the top-right corner of the preview for easier access.
 - Made the **preview area scrollable** to accommodate more images without layout issues.
 - Set a fixed number of **4 columns** for consistent image preview layout.
