@@ -2,17 +2,23 @@ export async function generateGif(
   files: File[],
   duration: number,
   width: number,
-  height: number
+  height: number,
+  perFrameDelays?: number[]
 ): Promise<Blob> {
   const formData = new FormData();
-  
+
   files.forEach((file) => {
     formData.append("files", file);
   });
-  
+
   formData.append("duration", duration.toString());
   formData.append("width", width.toString());
   formData.append("height", height.toString());
+
+  // Send per-frame delays if provided
+  if (perFrameDelays && perFrameDelays.length === files.length) {
+    formData.append("durations", JSON.stringify(perFrameDelays));
+  }
 
   const response = await fetch("http://127.0.0.1:8000/generate-gif", {
     method: "POST",
