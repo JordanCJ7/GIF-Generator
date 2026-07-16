@@ -13,12 +13,16 @@ Create high-fidelity animations, configure frame pacing down to the millisecond,
 
 ## ⚡ Core Features
 
-- **🚀 Ultra-Fast Processing**: Multi-threaded image processing powered by a FastAPI & Pillow micro-engine.
-- **✨ Premium UI/UX**: An interactive Onyx/Slate workspace featuring neon accent glow states, layout transition physics, and smooth focus controls.
-- **📂 Fluid Drag & Drop**: Visual file ingestion board supporting native select fallbacks and instant item rendering.
-- **🎨 Animated Preview Deck**: Grid overview containing real-time queue ordering badges and instant item-level removal with slide-out exit animations.
-- **⚙️ Advanced Configuration**: Independent, pixel-perfect frame duration adjustments and target dimensions (Width × Height) with LANCZOS high-fidelity scaling.
-- **📦 Compact & Safe**: Desktop wrappers provided by Tauri ensure zero bloatware, minimal memory usage, and fully offline security.
+*   **🛠️ Compact Multi-Tool Media Suite**: A consolidated desktop dashboard featuring five distinct media tools:
+    *   **GIF Creator**: Stitch static images together with millisecond delay precision and custom sizing.
+    *   **Video to GIF**: Seek-slice MP4/WebM videos frame-by-frame and compile into high-quality GIFs.
+    *   **GIF Compressor**: Optimize palette size and reduce overhead on large animated GIFs.
+    *   **Image Converter**: Instant client-side format changes between PNG, JPEG, and WebP.
+    *   **Screen Recorder**: Capture display output or windows and export them straight to GIF.
+*   **✨ Premium UI/UX**: An interactive Onyx/Slate workspace featuring sidebar navigation, neon accent glow states, Framer Motion layouts, and smooth transition animations.
+*   **📂 Fluid Ingestion**: Drag & drop boards supporting native file selectors and instant browser previews.
+*   **⚙️ High-Fidelity Processing**: Fast image interpolation and color quantization powered by our local FastAPI/Pillow micro-engine.
+*   **📦 Native Wrapper**: Desktop packaging via Tauri ensures zero bloatware, minimal memory usage, and fully offline operations.
 
 ---
 
