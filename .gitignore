@@ -1,0 +1,62 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+web_modules/
+
+# Next.js build output
+.next/
+out/
+build/
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Operating System files
+.DS_Store
+Thumbs.db
+*.local
+
+# Environment variables
+.env*.local
+.env
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Rust / Tauri build output
+src-tauri/target/
+
+# Python virtual environment & cache
+venv/
+.venv/
+ENV/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.tox/
+.coverage
+htmlcov/
+src-tauri/python-backend/venv/
+src-tauri/python-backend/__pycache__/
+
+# IDEs and editors
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
