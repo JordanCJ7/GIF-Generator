@@ -10,17 +10,20 @@ MotionFlow Studio utilizes a hybrid frontend/backend desktop architecture:
 
 ```mermaid
 graph TD
-    A[Tauri App Shell / Browser] -->|Renders UI| B[Next.js + TypeScript Webview]
-    B -->|User uploads images & clicks Generate| C[Multipart Form-Data Request]
-    C -->|Sends data to localhost:8000| D[FastAPI Backend Server]
-    D -->|Processes images via Pillow LANCZOS| E[GIF Compilation]
-    E -->|Streams GIF binary buffer| B
-    B -->|Triggers browser-level file download| A
+    A[Tauri App Shell / Browser] -->|Renders UI| B[Next.js Dashboard Webview]
+    B -->|Convert Images| C1[Client-Side Canvas Processing]
+    B -->|Record Screen / Extract Video Frames| C2[Seek-based Canvas Extraction]
+    B -->|Generate GIF / Compress GIF| C3[FastAPI Backend Server]
+    C3 -->|Processes images via Pillow| D[GIF / Compression Compiler]
+    C1 -->|Instant Download| E[File System]
+    C2 -->|Sends extracted frames| C3
+    D -->|Streams file buffer| B
 ```
 
-- **Next.js & Framer Motion** provide the user-interactive editor interface.
-- **FastAPI** handles the resource-intensive image processing tasks in the background, utilizing Python's Pillow library for resizing, color conversion, and optimization.
-- **Tauri** acts as the native desktop wrapper, hosting the web views securely.
+*   **Next.js & Framer Motion** provide the user-interactive editor interface with dynamic tab routing.
+*   **HTML5 Media & Canvas APIs** are used for client-side screen recording, video playback slicing, and format conversions without backend roundtrips.
+*   **FastAPI & Pillow** handle bulk GIF compilation and palette optimization at `localhost:8000`.
+*   **Tauri** acts as the native desktop wrapper, hosting the web views securely.
 
 ---
 
@@ -107,6 +110,11 @@ Open a new terminal window at the project root directory.
 │   │   ├── DragDropZone.tsx # Framer-motion files drop zone
 │   │   ├── PreviewGrid.tsx  # Animated, layout-aware preview deck
 │   │   ├── SettingsPanel.tsx# Generation parameter inputs
+│   │   ├── tools/           # Specialized tool components
+│   │   │   ├── VideoToGif.tsx
+│   │   │   ├── GifCompressor.tsx
+│   │   │   ├── ImageConverter.tsx
+│   │   │   └── ScreenRecorder.tsx
 │   │   └── ui/              # Shadcn/ui-inspired primitive components
 │   │       ├── button.tsx
 │   │       └── input.tsx
