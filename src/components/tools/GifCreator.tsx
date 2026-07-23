@@ -79,11 +79,12 @@ export const GifCreator: React.FC = () => {
       const idx = prev.findIndex((f) => f.id === id);
       if (idx === -1) return prev;
       const src = prev[idx];
+      const previewUrl = URL.createObjectURL(src.file);
       const copy: FrameItem = {
         ...src,
         id: Math.random().toString(36).substring(2, 9),
-        previewUrl: src.previewUrl, // safe to reuse — we don't revoke until removal
-        editedUrl: src.editedUrl,
+        previewUrl,
+        editedUrl: src.editedUrl.startsWith("blob:") ? previewUrl : src.editedUrl,
         edits: { ...src.edits, textOverlay: src.edits.textOverlay ? { ...src.edits.textOverlay } : null },
       };
       const next = [...prev];
