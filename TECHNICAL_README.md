@@ -24,7 +24,7 @@ graph TD
 
 *   **Next.js & Framer Motion** provide the user-interactive editor interface with dynamic tab routing.
 *   **FrameEditorModal** enables pixel-level operations (filters, rotation, text overlays) client-side using canvas, feeding modified frame buffer URLs back to the editor state.
-*   **HTML5 Media & Canvas APIs** are used for client-side screen recording, video playback slicing, and format conversions without backend roundtrips.
+*   **HTML5 Media & Canvas APIs** are used for client-side screen recording, video playback slicing (including an interactive dual-handle range slider for visual trimming with real-time seek preview), and format conversions without backend roundtrips.
 *   **FastAPI & Pillow** handle bulk GIF compilation and palette optimization at `localhost:8000`, supporting custom per-frame delays (`durations` parameter).
 *   **Tauri** acts as the native desktop wrapper, hosting the web views securely.
 
