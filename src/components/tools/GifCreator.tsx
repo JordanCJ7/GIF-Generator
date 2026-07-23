@@ -250,7 +250,15 @@ export const GifCreator: React.FC = () => {
             </div>
             {frames.length > 0 && (
               <button
-                onClick={() => setFrames([])}
+                onClick={() => {
+                  frames.forEach((f) => {
+                    if (f.previewUrl.startsWith("blob:")) URL.revokeObjectURL(f.previewUrl);
+                    if (f.editedUrl.startsWith("blob:") && f.editedUrl !== f.previewUrl) {
+                      URL.revokeObjectURL(f.editedUrl);
+                    }
+                  });
+                  setFrames([]);
+                }}
                 className="text-[10px] text-zinc-500 hover:text-accent-red transition-colors"
               >
                 Clear all
