@@ -14,7 +14,7 @@ Create high-fidelity animations, configure frame pacing down to the millisecond,
 ## ⚡ Core Features
 
 *   **🛠️ Compact Multi-Tool Media Suite**: A consolidated desktop dashboard featuring five distinct media tools:
-    *   **GIF Creator**: Stitch static images together with millisecond delay precision and custom sizing.
+    *   **GIF Creator**: Interactive timeline builder with drag-and-drop reordering, frame duplication, custom per-frame delays, and a built-in canvas editor (rotation, filters, text overlays).
     *   **Video to GIF**: Seek-slice MP4/WebM videos frame-by-frame and compile into high-quality GIFs.
     *   **GIF Compressor**: Optimize palette size and reduce overhead on large animated GIFs.
     *   **Image Converter**: Instant client-side format changes between PNG, JPEG, and WebP.
@@ -43,7 +43,7 @@ MotionFlow Studio is built with a state-of-the-art hybrid stack:
 
 For developers, technical requirements, and building procedures, please refer to our dedicated documentation:
 
-👉 **[Technical Setup & Architecture Guide (TECHNICAL_README.md)](./TECHNICAL_README.md)**
+👉 **[Technical Setup & Architecture Guide](./TECHNICAL_README.md)**
 
 ---
 

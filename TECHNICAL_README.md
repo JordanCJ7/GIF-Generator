@@ -13,7 +13,9 @@ graph TD
     A[Tauri App Shell / Browser] -->|Renders UI| B[Next.js Dashboard Webview]
     B -->|Convert Images| C1[Client-Side Canvas Processing]
     B -->|Record Screen / Extract Video Frames| C2[Seek-based Canvas Extraction]
+    B -->|Edit Individual Frame| FE[Canvas-based FrameEditorModal]
     B -->|Generate GIF / Compress GIF| C3[FastAPI Backend Server]
+    FE -->|Returns edited frame data URL| B
     C3 -->|Processes images via Pillow| D[GIF / Compression Compiler]
     C1 -->|Instant Download| E[File System]
     C2 -->|Sends extracted frames| C3
@@ -21,8 +23,9 @@ graph TD
 ```
 
 *   **Next.js & Framer Motion** provide the user-interactive editor interface with dynamic tab routing.
+*   **FrameEditorModal** enables pixel-level operations (filters, rotation, text overlays) client-side using canvas, feeding modified frame buffer URLs back to the editor state.
 *   **HTML5 Media & Canvas APIs** are used for client-side screen recording, video playback slicing, and format conversions without backend roundtrips.
-*   **FastAPI & Pillow** handle bulk GIF compilation and palette optimization at `localhost:8000`.
+*   **FastAPI & Pillow** handle bulk GIF compilation and palette optimization at `localhost:8000`, supporting custom per-frame delays (`durations` parameter).
 *   **Tauri** acts as the native desktop wrapper, hosting the web views securely.
 
 ---
@@ -111,6 +114,8 @@ Open a new terminal window at the project root directory.
 │   │   ├── PreviewGrid.tsx  # Animated, layout-aware preview deck
 │   │   ├── SettingsPanel.tsx# Generation parameter inputs
 │   │   ├── tools/           # Specialized tool components
+│   │   │   ├── GifCreator.tsx       # GIF Timeline, reordering & timing logic
+│   │   │   ├── FrameEditorModal.tsx # Canvas frame rotation, text, and filters
 │   │   │   ├── VideoToGif.tsx
 │   │   │   ├── GifCompressor.tsx
 │   │   │   ├── ImageConverter.tsx
