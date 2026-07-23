@@ -14,18 +14,18 @@ graph TD
     B -->|Convert Images| C1[Client-Side Canvas Processing]
     B -->|Record Screen / Extract Video Frames| C2[Seek-based Canvas Extraction]
     B -->|Edit Individual Frame| FE[Canvas-based FrameEditorModal]
-    B -->|Generate GIF / Compress GIF| C3[FastAPI Backend Server]
+    B -->|Generate GIF / Compress GIF / Optimize GIF| C3[FastAPI Backend Server]
     FE -->|Returns edited frame data URL| B
-    C3 -->|Processes images via Pillow| D[GIF / Compression Compiler]
+    C3 -->|Processes images via Pillow & Gifsicle| D[GIF / Lossy LZW Compression Engine]
     C1 -->|Instant Download| E[File System]
     C2 -->|Sends extracted frames| C3
-    D -->|Streams file buffer| B
+    D -->|Streams file buffer + headers| B
 ```
 
 *   **Next.js & Framer Motion** provide the user-interactive editor interface with dynamic tab routing.
 *   **FrameEditorModal** enables pixel-level operations (filters, rotation, text overlays) client-side using canvas, feeding modified frame buffer URLs back to the editor state.
 *   **HTML5 Media & Canvas APIs** are used for client-side screen recording, video playback slicing (including an interactive dual-handle range slider for visual trimming with real-time seek preview), and format conversions without backend roundtrips.
-*   **FastAPI & Pillow** handle bulk GIF compilation and palette optimization at `localhost:8000`, supporting custom per-frame delays (`durations` parameter).
+*   **FastAPI, Pillow & Gifsicle** handle bulk GIF compilation, custom per-frame delays (`durations` parameter), and advanced lossy/lossless LZW optimization (`/optimize-gif` via bundled Gifsicle executable) at `localhost:8000`.
 *   **Tauri** acts as the native desktop wrapper, hosting the web views securely.
 
 ---
@@ -133,7 +133,9 @@ Open a new terminal window at the project root directory.
 │   ├── src/
 │   │   └── main.rs          # Tauri wrapper entrypoint
 │   └── python-backend/
-│       ├── main.py          # FastAPI application
+│       ├── main.py          # FastAPI application & Gifsicle subprocess handler
+│       ├── bin/
+│       │   └── gifsicle.exe # Bundled Gifsicle CLI binary for lossy LZW compression
 │       └── requirements.txt # Python package declarations
 ├── package.json             # Node script triggers and configurations
 ├── tailwind.config.ts       # Tailwind CSS configurations

@@ -1,3 +1,6 @@
+# Bundled native binaries (downloaded at dev/setup time)
+src-tauri/python-backend/bin/
+
 # Dependency directories
 node_modules/
 jspm_packages/
