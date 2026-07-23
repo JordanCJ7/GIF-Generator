@@ -2,11 +2,12 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Film, FileArchive, Shuffle, Monitor, Layers } from "lucide-react";
+import { Sparkles, Film, FileArchive, Shuffle, Monitor, Layers, FileVideo } from "lucide-react";
 
 // Tool Components
 import { GifCreator } from "@/components/tools/GifCreator";
 import { VideoToGif } from "@/components/tools/VideoToGif";
+import { GifToVideo } from "@/components/tools/GifToVideo";
 import { GifCompressor } from "@/components/tools/GifCompressor";
 import { ImageConverter } from "@/components/tools/ImageConverter";
 import { ScreenRecorder } from "@/components/tools/ScreenRecorder";
@@ -24,6 +25,7 @@ export default function Home() {
   const tools: ToolItem[] = [
     { id: "gif-creator", name: "GIF Creator", description: "Create animated GIFs from static images", icon: Layers },
     { id: "video-to-gif", name: "Video to GIF", description: "Convert video clips to high-quality GIFs", icon: Film },
+    { id: "gif-to-video", name: "GIF to Video", description: "Convert animated GIFs to MP4 or WebM video", icon: FileVideo },
     { id: "gif-compressor", name: "GIF Compressor", description: "Reduce size of animated GIF files", icon: FileArchive },
     { id: "image-converter", name: "Image Converter", description: "Format and resize static images", icon: Shuffle },
     { id: "screen-recorder", name: "Screen Recorder", description: "Record display output straight to GIF", icon: Monitor },
@@ -55,6 +57,19 @@ export default function Home() {
             className="flex-1 flex overflow-hidden"
           >
             <VideoToGif />
+          </motion.div>
+        );
+      case "gif-to-video":
+        return (
+          <motion.div
+            key="gif-to-video"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="flex-1 flex overflow-hidden"
+          >
+            <GifToVideo />
           </motion.div>
         );
       case "gif-compressor":
