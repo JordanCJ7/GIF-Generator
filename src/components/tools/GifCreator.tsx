@@ -38,9 +38,18 @@ export const GifCreator: React.FC = () => {
   // Drag state (native HTML5)
   const dragIndexRef = useRef<number | null>(null);
 
+  // Keep latest frames for unmount cleanup (avoid stale closure on [])
+  const framesRef = useRef<FrameItem[]>([]);
+  useEffect(() => {
+    framesRef.current = frames;
+  }, [frames]);
+
   useEffect(() => {
     return () => {
-      frames.forEach((f) => URL.revokeObjectURL(f.previewUrl));
+      framesRef.current.forEach((f) => {
+        if (f.previewUrl.startsWith("blob:")) URL.revokeObjectURL(f.previewUrl);
+        if (f.editedUrl.startsWith("blob:")) URL.revokeObjectURL(f.editedUrl);
+      });
     };
   }, []);
 
