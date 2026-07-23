@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useCallback } from "react";
 import { Sparkles, Film, FileArchive, Shuffle, Monitor, Layers, FileVideo } from "lucide-react";
 
 // Tool Components
@@ -21,6 +20,11 @@ interface ToolItem {
 
 export default function Home() {
   const [selectedTool, setSelectedTool] = useState<string>("gif-creator");
+  const [isScreenRecording, setIsScreenRecording] = useState(false);
+
+  const handleRecordingChange = useCallback((isRecording: boolean) => {
+    setIsScreenRecording(isRecording);
+  }, []);
 
   const tools: ToolItem[] = [
     { id: "gif-creator", name: "GIF Creator", description: "Create animated GIFs from static images", icon: Layers },
@@ -30,91 +34,6 @@ export default function Home() {
     { id: "image-converter", name: "Image Converter", description: "Format and resize static images", icon: Shuffle },
     { id: "screen-recorder", name: "Screen Recorder", description: "Record display output straight to GIF", icon: Monitor },
   ];
-
-  const renderActiveTool = () => {
-    switch (selectedTool) {
-      case "gif-creator":
-        return (
-          <motion.div
-            key="gif-creator"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="flex-1 flex overflow-hidden"
-          >
-            <GifCreator />
-          </motion.div>
-        );
-      case "video-to-gif":
-        return (
-          <motion.div
-            key="video-to-gif"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="flex-1 flex overflow-hidden"
-          >
-            <VideoToGif />
-          </motion.div>
-        );
-      case "gif-to-video":
-        return (
-          <motion.div
-            key="gif-to-video"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="flex-1 flex overflow-hidden"
-          >
-            <GifToVideo />
-          </motion.div>
-        );
-      case "gif-compressor":
-        return (
-          <motion.div
-            key="gif-compressor"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="flex-1 flex overflow-hidden"
-          >
-            <GifCompressor />
-          </motion.div>
-        );
-      case "image-converter":
-        return (
-          <motion.div
-            key="image-converter"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="flex-1 flex overflow-hidden"
-          >
-            <ImageConverter />
-          </motion.div>
-        );
-      case "screen-recorder":
-        return (
-          <motion.div
-            key="screen-recorder"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="flex-1 flex overflow-hidden"
-          >
-            <ScreenRecorder />
-          </motion.div>
-        );
-      default:
-        return null;
-    }
-  };
 
   return (
     <main className="h-screen w-screen bg-background flex flex-col overflow-hidden">
@@ -149,6 +68,7 @@ export default function Home() {
             {tools.map((tool) => {
               const Icon = tool.icon;
               const isActive = selectedTool === tool.id;
+              const showRecordingDot = tool.id === "screen-recorder" && isScreenRecording && !isActive;
               return (
                 <button
                   key={tool.id}
@@ -159,21 +79,46 @@ export default function Home() {
                       : "text-zinc-400 hover:bg-card/50 hover:text-zinc-200 border border-transparent"
                   }`}
                 >
-                  <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-accent-blue" : "text-zinc-400"}`} />
+                  <div className="relative shrink-0">
+                    <Icon className={`w-4 h-4 ${isActive ? "text-accent-blue" : "text-zinc-400"}`} />
+                    {showRecordingDot && (
+                      <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-zinc-950 animate-pulse" />
+                    )}
+                  </div>
                   <div className="flex flex-col min-w-0">
                     <span className="text-xs truncate">{tool.name}</span>
                   </div>
+                  {tool.id === "screen-recorder" && isScreenRecording && isActive && (
+                    <span className="ml-auto text-[9px] font-bold text-red-400 bg-red-500/10 border border-red-500/20 px-1.5 py-0.5 rounded-full uppercase tracking-wider animate-pulse">
+                      REC
+                    </span>
+                  )}
                 </button>
               );
             })}
           </nav>
         </aside>
 
-        {/* Dynamic Tool Workspace */}
-        <div className="flex-1 flex overflow-hidden">
-          <AnimatePresence mode="wait">
-            {renderActiveTool()}
-          </AnimatePresence>
+        {/* Dynamic Tool Workspace — All tools stay mounted, visibility toggled via CSS */}
+        <div className="flex-1 flex overflow-hidden relative">
+          <div className={`absolute inset-0 flex ${selectedTool === "gif-creator" ? "" : "invisible pointer-events-none"}`}>
+            <GifCreator />
+          </div>
+          <div className={`absolute inset-0 flex ${selectedTool === "video-to-gif" ? "" : "invisible pointer-events-none"}`}>
+            <VideoToGif />
+          </div>
+          <div className={`absolute inset-0 flex ${selectedTool === "gif-to-video" ? "" : "invisible pointer-events-none"}`}>
+            <GifToVideo />
+          </div>
+          <div className={`absolute inset-0 flex ${selectedTool === "gif-compressor" ? "" : "invisible pointer-events-none"}`}>
+            <GifCompressor />
+          </div>
+          <div className={`absolute inset-0 flex ${selectedTool === "image-converter" ? "" : "invisible pointer-events-none"}`}>
+            <ImageConverter />
+          </div>
+          <div className={`absolute inset-0 flex ${selectedTool === "screen-recorder" ? "" : "invisible pointer-events-none"}`}>
+            <ScreenRecorder onRecordingChange={handleRecordingChange} />
+          </div>
         </div>
       </div>
     </main>
