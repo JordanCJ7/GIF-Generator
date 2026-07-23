@@ -16,12 +16,12 @@ Create high-fidelity animations, configure frame pacing down to the millisecond,
 *   **🛠️ Compact Multi-Tool Media Suite**: A consolidated desktop dashboard featuring five distinct media tools:
     *   **GIF Creator**: Interactive timeline builder with drag-and-drop reordering, frame duplication, custom per-frame delays, and a built-in canvas editor (rotation, filters, text overlays).
     *   **Video to GIF**: Interactive dual-handle range slider for visual trimming, real-time frame preview on seek, and high-quality canvas extraction.
-    *   **GIF Compressor**: Optimize palette size and reduce overhead on large animated GIFs.
+    *   **GIF Compressor**: Advanced lossy & lossless LZW optimization powered by bundled Gifsicle binary, supporting lossy level sliders (0–200), color palette controls, O1–O3 optimization, and real-time size reduction stats.
     *   **Image Converter**: Instant client-side format changes between PNG, JPEG, and WebP.
     *   **Screen Recorder**: Capture display output or windows and export them straight to GIF.
 *   **✨ Premium UI/UX**: An interactive Onyx/Slate workspace featuring sidebar navigation, neon accent glow states, Framer Motion layouts, and smooth transition animations.
 *   **📂 Fluid Ingestion**: Drag & drop boards supporting native file selectors and instant browser previews.
-*   **⚙️ High-Fidelity Processing**: Fast image interpolation and color quantization powered by our local FastAPI/Pillow micro-engine.
+*   **⚙️ High-Fidelity Processing**: Fast image interpolation, lossy LZW compression, and color quantization powered by our local FastAPI/Pillow/Gifsicle micro-engine.
 *   **📦 Native Wrapper**: Desktop packaging via Tauri ensures zero bloatware, minimal memory usage, and fully offline operations.
 
 ---
@@ -35,7 +35,7 @@ MotionFlow Studio is built with a state-of-the-art hybrid stack:
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **Micro-Animations**: [Framer Motion](https://www.framer.com/motion/)
 - **Iconography**: [Lucide React](https://lucide.dev/)
-- **Processing Backend**: [FastAPI](https://fastapi.tiangolo.com/) (Python) + [Pillow (PIL)](https://python-pillow.org/)
+- **Processing Backend**: [FastAPI](https://fastapi.tiangolo.com/) (Python) + [Pillow (PIL)](https://python-pillow.org/) + [Gifsicle](https://www.lcdf.org/gifsicle/) (Lossy LZW compression binary)
 
 ---
 
