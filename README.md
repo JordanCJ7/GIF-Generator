@@ -15,7 +15,7 @@ Create high-fidelity animations, configure frame pacing down to the millisecond,
 
 *   **🛠️ Compact Multi-Tool Media Suite**: A consolidated desktop dashboard featuring five distinct media tools:
     *   **GIF Creator**: Interactive timeline builder with drag-and-drop reordering, frame duplication, custom per-frame delays, and a built-in canvas editor (rotation, filters, text overlays).
-    *   **Video to GIF**: Seek-slice MP4/WebM videos frame-by-frame and compile into high-quality GIFs.
+    *   **Video to GIF**: Interactive dual-handle range slider for visual trimming, real-time frame preview on seek, and high-quality canvas extraction.
     *   **GIF Compressor**: Optimize palette size and reduce overhead on large animated GIFs.
     *   **Image Converter**: Instant client-side format changes between PNG, JPEG, and WebP.
     *   **Screen Recorder**: Capture display output or windows and export them straight to GIF.
