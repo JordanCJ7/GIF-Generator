@@ -292,15 +292,51 @@ export const VideoToGif: React.FC = () => {
             Conversion Settings
           </h3>
 
-          <div className="flex flex-col gap-2">
-            <label className="text-xs font-medium text-zinc-400">Target FPS</label>
-            <Input
-              type="number"
-              value={fps}
-              onChange={(e) => setFps(Math.min(30, Math.max(1, parseInt(e.target.value) || 10)))}
-              min={1}
-              max={30}
-            />
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center justify-between">
+              <label className="text-xs font-medium text-zinc-400">Target FPS</label>
+              <span className="text-xs font-mono font-bold text-white bg-zinc-900 border border-border px-2 py-0.5 rounded-md">
+                {fps} fps
+              </span>
+            </div>
+            <div className="relative h-5 flex items-center">
+              <div className="absolute left-0 right-0 h-1.5 bg-zinc-800 rounded-full" />
+              <div
+                className="absolute left-0 h-1.5 bg-accent-blue rounded-full transition-all duration-75"
+                style={{ width: `${((fps - 1) / (60 - 1)) * 100}%` }}
+              />
+              <input
+                type="range"
+                min={1}
+                max={60}
+                step={1}
+                value={fps}
+                onChange={(e) => setFps(Number(e.target.value))}
+                disabled={isConverting}
+                className="absolute w-full h-full opacity-0 cursor-pointer disabled:cursor-not-allowed"
+              />
+              <div
+                className="absolute w-4 h-4 rounded-full bg-accent-blue border-2 border-white shadow-md shadow-blue-500/30 -translate-x-1/2 pointer-events-none transition-all duration-75"
+                style={{ left: `${((fps - 1) / (60 - 1)) * 100}%` }}
+              />
+            </div>
+            <div className="grid grid-cols-6 gap-1.5">
+              {[5, 10, 15, 24, 30, 60].map((preset) => (
+                <button
+                  key={preset}
+                  type="button"
+                  disabled={isConverting}
+                  onClick={() => setFps(preset)}
+                  className={`py-1.5 rounded-lg border text-[10px] font-mono font-semibold transition-all duration-150 ${
+                    fps === preset
+                      ? "border-accent-blue bg-accent-blue/10 text-white"
+                      : "border-zinc-800 bg-zinc-900/60 text-zinc-500 hover:border-zinc-700 hover:text-zinc-300 disabled:opacity-40 disabled:cursor-not-allowed"
+                  }`}
+                >
+                  {preset}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
