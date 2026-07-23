@@ -69,7 +69,12 @@ export const GifCreator: React.FC = () => {
   const handleRemoveFrame = (id: string) => {
     setFrames((prev) => {
       const target = prev.find((f) => f.id === id);
-      if (target) URL.revokeObjectURL(target.previewUrl);
+      if (target) {
+        if (target.previewUrl.startsWith("blob:")) URL.revokeObjectURL(target.previewUrl);
+        if (target.editedUrl.startsWith("blob:") && target.editedUrl !== target.previewUrl) {
+          URL.revokeObjectURL(target.editedUrl);
+        }
+      }
       return prev.filter((f) => f.id !== id);
     });
   };
