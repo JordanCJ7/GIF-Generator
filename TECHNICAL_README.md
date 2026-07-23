@@ -24,7 +24,7 @@ graph TD
 
 *   **Next.js & Framer Motion** provide the user-interactive editor interface with dynamic tab routing.
 *   **FrameEditorModal** enables pixel-level operations (filters, rotation, text overlays) client-side using canvas, feeding modified frame buffer URLs back to the editor state.
-*   **HTML5 Media & Canvas APIs** are used for client-side screen recording, video playback slicing (including an interactive dual-handle range slider for visual trimming with real-time seek preview), and format conversions without backend roundtrips.
+*   **HTML5 Media, Canvas & WebCodecs APIs** are used for client-side GIF-to-video conversion (`ImageDecoder` + `MediaRecorder`), screen recording, video playback slicing (including interactive dual-handle trimming with real-time seek preview), and format conversions without backend roundtrips.
 *   **FastAPI, Pillow & Gifsicle** handle bulk GIF compilation, custom per-frame delays (`durations` parameter), and advanced lossy/lossless LZW optimization (`/optimize-gif` via bundled Gifsicle executable) at `localhost:8000`.
 *   **Tauri** acts as the native desktop wrapper, hosting the web views securely.
 
@@ -117,6 +117,7 @@ Open a new terminal window at the project root directory.
 │   │   │   ├── GifCreator.tsx       # GIF Timeline, reordering & timing logic
 │   │   │   ├── FrameEditorModal.tsx # Canvas frame rotation, text, and filters
 │   │   │   ├── VideoToGif.tsx
+│   │   │   ├── GifToVideo.tsx       # WebCodecs + MediaRecorder GIF-to-MP4/WebM converter
 │   │   │   ├── GifCompressor.tsx
 │   │   │   ├── ImageConverter.tsx
 │   │   │   └── ScreenRecorder.tsx

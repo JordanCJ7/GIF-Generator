@@ -13,9 +13,10 @@ Create high-fidelity animations, configure frame pacing down to the millisecond,
 
 ## ⚡ Core Features
 
-*   **🛠️ Compact Multi-Tool Media Suite**: A consolidated desktop dashboard featuring five distinct media tools:
+*   **🛠️ Compact Multi-Tool Media Suite**: A consolidated desktop dashboard featuring six distinct media tools:
     *   **GIF Creator**: Interactive timeline builder with drag-and-drop reordering, frame duplication, custom per-frame delays, and a built-in canvas editor (rotation, filters, text overlays).
     *   **Video to GIF**: Interactive dual-handle range slider for visual trimming, real-time frame preview on seek, and high-quality canvas extraction.
+    *   **GIF to Video**: Convert heavy animated GIFs into lightweight MP4/WebM videos (up to 90% size reduction) using browser WebCodecs and MediaRecorder APIs.
     *   **GIF Compressor**: Advanced lossy & lossless LZW optimization powered by bundled Gifsicle binary, supporting lossy level sliders (0–200), color palette controls, O1–O3 optimization, and real-time size reduction stats.
     *   **Image Converter**: Instant client-side format changes between PNG, JPEG, and WebP.
     *   **Screen Recorder**: Capture display output or windows and export them straight to GIF.
